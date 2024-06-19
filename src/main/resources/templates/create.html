@@ -31,14 +31,11 @@
 
         <div class="form-group">
             <label for="lectureName">Lecture:</label>
-            <input class="form-control" type="text" th:field="*{lectureName}" id="lectureName" placeholder="LectureName" required>
+            <input class="form-control" type="text" th:field="*{lectureName}" id="lectureName" placeholder="LectureName" required maxlength="100">
         </div>
         <input type="submit" class="btn btn-success" value="add">
     </form>
 </div>
-<div class="card-footer">
-    <hr/>
-    Lập Trình Ứng Dụng Java - Nguyễn Huy Cường - @2023
-</div>
+
 </body>
 </html>
