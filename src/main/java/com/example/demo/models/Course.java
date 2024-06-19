@@ -11,6 +11,10 @@ public class Course {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String lectureName;
+    private String place;
+    private LocalDate startDate;
+
+    // getters and setters
 
     public int getId() {
         return id;
@@ -43,9 +47,4 @@ public class Course {
     public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
     }
-
-    private String place;
-    private LocalDate startDate;
-
-    // getters và setters
 }

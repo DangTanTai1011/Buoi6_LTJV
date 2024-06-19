@@ -5,10 +5,9 @@ import com.example.demo.services.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/course")
@@ -49,5 +48,27 @@ public class CourseController {
     public String delete(@PathVariable int id){
         courseService.delete(id);
         return "redirect:/home";
+    }
+
+    @GetMapping("/search")
+    public String search(@RequestParam(name = "place") String place,
+                         @RequestParam(name = "lectureName") String lectureName,
+                         Model model){
+        List<Course> courses = courseService.searchByPlaceAndLectureName(place, lectureName);
+        model.addAttribute("listcourse", courses);
+        return "home";
+    }
+    @GetMapping("/searchByPlace")
+    public String searchByPlace(@RequestParam(name = "place") String place, Model model){
+        List<Course> courses = courseService.searchByPlace(place);
+        model.addAttribute("listcourse", courses);
+        return "home";
+    }
+
+    @GetMapping("/searchByLectureName")
+    public String searchByLectureName(@RequestParam(name = "lectureName") String lectureName, Model model){
+        List<Course> courses = courseService.searchByLectureName(lectureName);
+        model.addAttribute("listcourse", courses);
+        return "home";
     }
 }

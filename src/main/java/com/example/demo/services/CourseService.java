@@ -6,7 +6,6 @@ import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -37,5 +36,26 @@ public class CourseService {
         if (course != null) {
             entityManager.remove(course);
         }
+    }
+
+    public List<Course> searchByPlaceAndLectureName(String place, String lectureName){
+        String query = "SELECT c FROM Course c WHERE c.place = :place AND c.lectureName = :lectureName";
+        return entityManager.createQuery(query, Course.class)
+                .setParameter("place", place)
+                .setParameter("lectureName", lectureName)
+                .getResultList();
+    }
+    public List<Course> searchByPlace(String place){
+        String query = "SELECT c FROM Course c WHERE c.place = :place";
+        return entityManager.createQuery(query, Course.class)
+                .setParameter("place", place)
+                .getResultList();
+    }
+
+    public List<Course> searchByLectureName(String lectureName){
+        String query = "SELECT c FROM Course c WHERE c.lectureName = :lectureName";
+        return entityManager.createQuery(query, Course.class)
+                .setParameter("lectureName", lectureName)
+                .getResultList();
     }
 }
